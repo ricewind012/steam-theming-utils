@@ -1,0 +1,14 @@
+{
+  "name": "steam-class-names-modules",
+  "version": "1.0.0",
+  "description": "A list of Steam's modules for class names",
+  "main": "src/index.js",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.0"
+  },
+  "dependencies": {
+    "chrome-remote-interface": "^0.33.0",
+    "decky-frontend-lib": "^3.25.0"
+  }
+}
