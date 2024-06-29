@@ -1,9 +1,11 @@
 {
-  "name": "steam-class-names-modules",
+  "name": "steam-theming-utils",
   "version": "1.0.0",
-  "description": "A list of Steam's modules for class names",
-  "main": "src/index.js",
+  "description": "A collection of scripts for easier Steam theming",
   "type": "module",
+  "bin": {
+    "steam-theming-utils": "./index.js"
+  },
   "devDependencies": {
     "@biomejs/biome": "^1.8.0"
   },
