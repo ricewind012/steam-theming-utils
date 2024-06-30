@@ -1,6 +1,6 @@
 {
   "name": "steam-theming-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of scripts for easier Steam theming",
   "type": "module",
   "bin": {
