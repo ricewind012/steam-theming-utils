@@ -2,6 +2,10 @@
   "name": "steam-theming-utils",
   "version": "1.0.1",
   "description": "A collection of scripts for easier Steam theming",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ricewind012/steam-theming-utils"
+  },
   "type": "module",
   "bin": {
     "steam-theming-utils": "index.js"
