@@ -4,7 +4,7 @@
   "description": "A collection of scripts for easier Steam theming",
   "type": "module",
   "bin": {
-    "steam-theming-utils": "./index.js"
+    "steam-theming-utils": "index.js"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.0"
