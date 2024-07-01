@@ -485,7 +485,7 @@ classModules = [
 	// May conflict with other broadcast modules in the future
 	["vodplayer", (e) => e.BroadcastCtn],
 	["voicechatheadersteamdeck", (e) => e.ActiveCall],
-	["voicesettings", (e) => e.HotkeySettingRow],
+	["voicesettings", (e) => e.MicrophoneTest],
 	// Generic, but returns 1 module
 	["vrdashboard", (e) => e.FadeRight],
 	// Generic, but returns 1 module
