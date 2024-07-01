@@ -1,7 +1,7 @@
 /**
  * Special children that can not be easily identified.
  */
-specialCases = {
+specialModules = {
 	gamepaddialog: findAllModules(
 		(e) => e.WithBottomSeparator && !e.GyroButtonPickerDialog,
 	)[0],
@@ -9,27 +9,73 @@ specialCases = {
 	image: findAllModules((e) => e.ErrorDiv)[0],
 	loyaltyrewarditemembed: findAllModules((e) => e.Ctn)[0],
 	saleeventbbcodeparser: findAllModules((e) => e.ErrorDiv)[0],
-	// TODO: these are seen in the css loader map, but there are no such modules
-	//appdetailsbroadcastsection: (e) => e,
-	//awardicon: e => e,
-	//balloon: e => e.,
-	//broadcast_embeddable: e => e.PopOutVideoTitleBar,
-	//broadcastplayer: e => e.BroadcastPlayerLite,
-	//broadcastwidgets: e => e.StoreSaleImage_mini,
-	//controllerconfiguratorgyrocalibrationdialog: (e) => e,
-	//controllerconfiguratormapping: (e) => e,
-	//friendactivityfeed: (e) => e,
-	//gamenotes: (e) => e.NotesPagedSettings,
-	//gamenotespopups: (e) => e.GameNotesPopup,
-	//mainmenuapprunning: (e) => e,
-	//pmhover: (e) => e,
-	//prosemirror: (e) => e,
-	//quickaccesscontrols: (e) => e,
-	//shorttemplates: (e) => e,
-	//soundtrackoverlay: (e) => e,
-	//standardtemplates: (e) => e,
-	//vrgamepadui: (e) => e,
 };
+
+// TODO: these are seen in the css loader map, but there are no such modules
+//appdetailsbroadcastsection: (e) => e,
+//balloon: e => e.,
+//controllerconfiguratorgyrocalibrationdialog: (e) => e,
+//controllerconfiguratormapping: (e) => e,
+//friendactivityfeed: (e) => e,
+//mainmenuapprunning: (e) => e,
+//quickaccesscontrols: (e) => e,
+//shorttemplates: (e) => e,
+//soundtrackoverlay: (e) => e,
+//standardtemplates: (e) => e,
+//vrgamepadui: (e) => e,
+
+/**
+ * These are not seen in webpackCache for some reason.
+ * TODO: unify with the rest ?
+ * TODO: is absence of top-level await a bug ?
+ */
+(async () => {
+	window.parsedModules = [
+		...(
+			await Promise.all(
+				[
+					"awardicon",
+					"broadcast",
+					"chunk~1a96cdf59", // Also broadcast
+					"gamenotes",
+					"gamerecording",
+				].map(async (e) =>
+					(await fetch(`https://steamloopback.host/${e}.js`)).text(),
+				),
+			)
+		)
+			.join("")
+			.matchAll(/e\.exports=(.*?\})\}/g),
+	].map((e) => {
+		const exists = (c) => keys.some((e) => e === c);
+		const mod = JSON.parse(e[1].replace(/(\w+):/g, '"$1":'));
+		const keys = Object.keys(mod);
+		const name = (() => {
+			switch (true) {
+				case exists("IconList"):
+					return "awardicon";
+				case exists("PopOutVideoTitleBar"):
+					return "broadcastembeddable";
+				case exists("BroadcastPlayerLite"):
+					return "broadcastplayer";
+				case exists("StoreSaleImage_mini"):
+					return "broadcastwidgets";
+				case exists("NotesPagedSettings"):
+					return "gamenotes";
+				case exists("GameNotesPopup"):
+					return "gamenotespopups";
+				case exists("ClipSavedHint"):
+					return "gamerecording";
+				case exists("LinkHelp"):
+					return "pmhover";
+				case exists("CommandButton"):
+					return "prosemirror";
+			}
+		})();
+
+		return [name, mod];
+	});
+})();
 
 classModules = [
 	["aboutsteamdialog", (e) => e.AboutSteamDialog],

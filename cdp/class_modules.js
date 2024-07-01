@@ -22,7 +22,12 @@ findUniqueKey = (key, index = 0) =>
 		(mod) => findAllModules((mod2) => mod2[mod]).length === 1,
 	);
 
+// TODO: sort classes
 result = {
+	...specialModules,
+	...parsedModules
+		.map((e) => ({ [e[0]]: e[1] }))
+		.reduce((a, b) => Object.assign(a, b)),
 	...classModules
 		.flatMap((a) => {
 			const mod = findFirstModule(a[1], a[0]);
@@ -38,7 +43,6 @@ result = {
 			};
 		})
 		.reduce((a, b) => Object.assign(a, b)),
-	...specialCases,
 };
 
 // return
