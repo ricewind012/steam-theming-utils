@@ -22,7 +22,6 @@ findUniqueKey = (key, index = 0) =>
 		(mod) => findAllModules((mod2) => mod2[mod]).length === 1,
 	);
 
-// TODO: sort classes
 classModules = {
 	...specialModules,
 	...parsedModules
@@ -37,21 +36,14 @@ classModules = {
 
 			return {
 				[a[0]]: Object.keys(mod || {})
+					// Remove keys like "duration-app-launch"
 					.filter((e) => !mod[e].match(/^\d+(\.\d+)?(\w{2})?$/))
-					.map((e) => Object({ [e]: mod[e] }))
+					.map((e) => ({ [e]: mod[e] }))
 					.reduce((a, b) => Object.assign(a, b)),
 			};
 		})
 		.reduce((a, b) => Object.assign(a, b)),
 };
 
-sortedClassModules = Object.keys(classModules)
-	.sort()
-	.reduce((obj, key) => {
-		obj[key] = classModules[key];
-
-		return obj;
-	}, {});
-
 // return
-sortedClassModules;
+classModules;
