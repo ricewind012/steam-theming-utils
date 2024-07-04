@@ -29,3 +29,4 @@ export const run = async (expression) =>
 	});
 export const runWithResult = async (expression) =>
 	(await run(expression)).result.value;
+export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
