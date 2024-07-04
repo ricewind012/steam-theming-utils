@@ -2,19 +2,13 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { connection, packagePath } from "./shared.js";
+import { connection, readScript, SCRIPT_PATH } from "./shared.js";
 
-const scriptPath = path.join(packagePath, "lib");
-const files = fs
-	.readdirSync(scriptPath)
-	.filter((e) => e !== "shared.js")
-	.map((e) => e.replace(".js", ""));
+const files = fs.readdirSync(SCRIPT_PATH).map((e) => e.replace(".js", ""));
 if (!files.some((e) => process.argv[2] === e)) {
-	console.error(
-		"Usage: %s [%s]",
-		path.basename(process.argv[1]),
-		files.join("|"),
-	);
+	console.error("Usage: %s <script>", path.basename(process.argv[1]));
+	console.error("Where <script>:\n%s", files.map((e) => `- ${e}`).join("\n"));
+	connection.close();
 	process.exit(2);
 }
 
@@ -27,6 +21,6 @@ connection.Runtime.on("consoleAPICalled", (ev) => {
 	console.error(...ev.args.map((e) => e.description || e.value));
 });
 
-const script = await import(path.join(scriptPath, `${process.argv[2]}.js`));
+const script = await readScript(process.argv[2]);
 await script.execute();
 connection.close();

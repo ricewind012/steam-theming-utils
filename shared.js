@@ -19,14 +19,19 @@ export const connection = await cdp({
 export const packagePath = path.dirname(fileURLToPath(import.meta.url));
 
 export const CDP_FILES_PATH = path.join(packagePath, "cdp");
+export const SCRIPT_PATH = path.join(packagePath, "lib");
 
 export const readFile = (file) => fs.readFileSync(file).toString();
+export const readScript = async (name) =>
+	await import(path.join(SCRIPT_PATH, `${name}.js`));
 export const run = async (expression) =>
 	await connection.Runtime.evaluate({
 		expression,
 		awaitPromise: true,
 		returnByValue: true,
 	});
+export const runCdpFile = async (file) =>
+	await runWithResult(readFile(path.join(CDP_FILES_PATH, file)));
 export const runWithResult = async (expression) =>
 	(await run(expression)).result.value;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
