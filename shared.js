@@ -1,7 +1,7 @@
 import cdp from "chrome-remote-interface";
 import fs from "node:fs";
 import path from "node:path";
-import url from "node:url";
+import { fileURLToPath } from "node:url";
 
 export const connection = await cdp({
 	host: "127.0.0.1",
@@ -16,7 +16,9 @@ export const connection = await cdp({
 	);
 	process.exit(1);
 });
-export const packagePath = path.dirname(url.fileURLToPath(import.meta.url));
+export const packagePath = path.dirname(fileURLToPath(import.meta.url));
+
+export const CDP_FILES_PATH = path.join(packagePath, "cdp");
 
 export const readFile = (file) => fs.readFileSync(file).toString();
 export const run = async (expression) =>

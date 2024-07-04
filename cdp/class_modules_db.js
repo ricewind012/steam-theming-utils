@@ -77,7 +77,7 @@ specialModules = {
 	});
 })();
 
-classModules = [
+exportedModules = [
 	["aboutsteamdialog", (e) => e.AboutSteamDialog],
 	["accountpanel", (e) => e.ChangePersonaNameContent],
 	["accountsettings", (e) => e.Avatar && e.EntryLabel],

@@ -23,12 +23,12 @@ findUniqueKey = (key, index = 0) =>
 	);
 
 // TODO: sort classes
-result = {
+classModules = {
 	...specialModules,
 	...parsedModules
 		.map((e) => ({ [e[0]]: e[1] }))
 		.reduce((a, b) => Object.assign(a, b)),
-	...classModules
+	...exportedModules
 		.flatMap((a) => {
 			const mod = findFirstModule(a[1], a[0]);
 			if (!mod) {
@@ -45,11 +45,13 @@ result = {
 		.reduce((a, b) => Object.assign(a, b)),
 };
 
-// return
-Object.keys(result)
+sortedClassModules = Object.keys(classModules)
 	.sort()
 	.reduce((obj, key) => {
-		obj[key] = result[key];
+		obj[key] = classModules[key];
 
 		return obj;
 	}, {});
+
+// return
+sortedClassModules;
