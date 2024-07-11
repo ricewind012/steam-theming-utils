@@ -24,7 +24,7 @@ export const SCRIPT_PATH = path.join(packagePath, "lib");
 
 export const readFile = (file) => fs.readFileSync(file).toString();
 export const readScript = async (name) =>
-	await import(path.join(SCRIPT_PATH, `${name}.js`));
+	await import(`file://${path.join(SCRIPT_PATH, `${name}.js`)}`);
 export const run = async (expression) =>
 	await connection.Runtime.evaluate({
 		expression,
