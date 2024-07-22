@@ -26,9 +26,7 @@ function normalizeElement(el) {
 
 focusedPopup = [...g_PopupManager.GetPopups()].find((e) => e.focused);
 if (focusedPopup) {
-	const elements = [
-		...focusedPopup.m_popup.document.querySelectorAll("[class]"),
-	];
+	const elements = focusedPopup.m_popup.document.querySelectorAll("[class]");
 	for (const el of elements) {
 		normalizeElement(el);
 	}

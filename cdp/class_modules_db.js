@@ -486,6 +486,7 @@ exportedModules = [
 	["vodplayer", (e) => e.BroadcastCtn],
 	["voicechatheadersteamdeck", (e) => e.ActiveCall],
 	["voicesettings", (e) => e.MicrophoneTest],
+	// TODO: fix these 3 for GR update
 	// Generic, but returns 1 module
 	["vrdashboard", (e) => e.FadeRight],
 	// Generic, but returns 1 module
