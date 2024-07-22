@@ -4,16 +4,14 @@
   "description": "A collection of scripts for easier Steam theming",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ricewind012/steam-theming-utils"
+    "url": "git+https://github.com/ricewind012/steam-theming-utils.git"
   },
   "type": "module",
   "bin": {
     "steam-theming-utils": "index.js"
   },
-  "devDependencies": {
-    "@biomejs/biome": "^1.8.0"
-  },
   "dependencies": {
+    "@biomejs/biome": "^1.8.0",
     "chrome-remote-interface": "^0.33.2",
     "decky-frontend-lib": "^3.25.0",
     "postcss": "^8.4.39"
