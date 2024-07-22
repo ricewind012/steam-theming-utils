@@ -1,7 +1,15 @@
 import cdp from "chrome-remote-interface";
 import fs from "node:fs";
 import path from "node:path";
+import postcss from "postcss";
 import { fileURLToPath } from "node:url";
+
+const selectorReplacerPlugin = (opts) => (css) => {
+	css.walkRules((rule) => {
+		rule.selector = rule.selector.replace(opts.match, opts.replace);
+	});
+};
+selectorReplacerPlugin.postcss = true;
 
 export const connection = await cdp({
 	host: "127.0.0.1",
@@ -36,3 +44,4 @@ export const runCdpFile = async (file) =>
 export const runWithResult = async (expression) =>
 	(await run(expression)).result.value;
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+export const usePostcss = (opts) => postcss(selectorReplacerPlugin(opts));
