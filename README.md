@@ -1,11 +1,11 @@
 # steam-theming-utils
 
-A collection of scripts for easier Steam theming.
+A collection of scripts for easier (and futureproof) Steam theming.
 
 ## Usage
 
 ```sh
-$ npm i
+$ npm i steam-theming-utils
 $ npx steam-theming-utils <script>
 ```
 
