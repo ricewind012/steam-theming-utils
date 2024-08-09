@@ -1,28 +1,26 @@
+const gamepadDialogModules = findAllModules((e) => e.WithBottomSeparator);
+
 /**
  * Special children that can not be easily identified.
  */
 specialModules = {
-	gamepaddialog: findAllModules(
-		(e) => e.WithBottomSeparator && !e.GyroButtonPickerDialog,
-	)[0],
+	gamepaddialog: gamepadDialogModules[0],
 	cloudfileuploadbutton: findAllModules((e) => e.Ctn)[1],
+	// TODO: is this even used ?
+	controllerconfiguratorgyrocalibrationdialog: findModule(
+		(e) => e.BackgroundAnimation && Object.keys(e).length === 12,
+	),
+	controllerconfiguratormapping: gamepadDialogModules[2],
+	// TODO: is this even used ?
+	friendactivityfeed: findModule(
+		(e) => e.BreakNarrow && Object.keys(e).length === 24,
+	),
 	image: findAllModules((e) => e.ErrorDiv)[0],
 	loyaltyrewarditemembed: findAllModules((e) => e.Ctn)[0],
+	quickaccesscontrols: findAllModules((e) => e.QuickAccessNotifications)[1],
 	saleeventbbcodeparser: findAllModules((e) => e.ErrorDiv)[0],
+	vrgamepadui: findModule((e) => e.PopupBody && Object.keys(e).length === 7),
 };
-
-// TODO: these are seen in the css loader map, but there are no such modules
-//appdetailsbroadcastsection: (e) => e,
-//balloon: e => e.,
-//controllerconfiguratorgyrocalibrationdialog: (e) => e,
-//controllerconfiguratormapping: (e) => e,
-//friendactivityfeed: (e) => e,
-//mainmenuapprunning: (e) => e,
-//quickaccesscontrols: (e) => e,
-//shorttemplates: (e) => e,
-//soundtrackoverlay: (e) => e,
-//standardtemplates: (e) => e,
-//vrgamepadui: (e) => e,
 
 /**
  * These are not seen in webpackCache for some reason.
@@ -343,6 +341,7 @@ exportedModules = [
 	["main", (e) => e.throbberContainer],
 	["mainbrowser", (e) => e.MainBrowserContainer],
 	["mainmenu", (e) => e.IsVirtualKeyboardShown],
+	["mainmenuapprunning", (e) => e.NavigationBox],
 	["mainpanelapprunning", (e) => e.MainPanelAppRunning],
 	["managefriends", (e) => e.GenerateLinkButton],
 	["mandatoryupdate", (e) => e.MandatoryUpdateTakeoverContent],
@@ -446,7 +445,9 @@ exportedModules = [
 	["sharedialog", (e) => e.ShareButton && e.ShareIcon],
 	["sharescreenshotupload", (e) => e.ShareScreenshotDialog],
 	["sharewithfriends", (e) => e.ShareDescription],
+	["shorttemplates", (e) => e.ShortTemplate],
 	["shutdowndialog", (e) => e.ShutdownDialog],
+	["soundtrackoverlay", (e) => e.ContainerScroll && e.Back && !e.Art],
 	["sketchfab", (e) => e.sketchfabmodelembedded],
 	["smartscrollcontainer", (e) => e.ScrollToTopButtonPosition],
 	["sortingdropdowncontrolbutton", (e) => e.SortingDropDownControlButton],
@@ -454,6 +455,10 @@ exportedModules = [
 	["spotlight", (e) => e.SpotlightDLC],
 	["spotlightgameplaysummary", (e) => e.GamePlaySummaryContainer],
 	["ssadialog", (e) => e.SSADialog],
+	[
+		"standardtemplates",
+		(e) => e.StandardTemplateContainer && e.AchievementIcon,
+	],
 	["steamavatar", (e) => e.avatarFrameImg],
 	["steamchinareviewlauncher", (e) => e.AccountMenu && e.AppStatus],
 	["steamdeckbootupthrobber", (e) => e.MoviePlaying],
