@@ -457,7 +457,11 @@ exportedModules = [
 	["ssadialog", (e) => e.SSADialog],
 	[
 		"standardtemplates",
-		(e) => e.StandardTemplateContainer && e.AchievementIcon,
+		(e) =>
+			e.StandardTemplateContainer &&
+			!e.ShortTemplate &&
+			!e.FriendGame &&
+			!e.AllNotificationsCommentPlus,
 	],
 	["steamavatar", (e) => e.avatarFrameImg],
 	["steamchinareviewlauncher", (e) => e.AccountMenu && e.AppStatus],
