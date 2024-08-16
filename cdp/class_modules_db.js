@@ -1,10 +1,23 @@
 const gamepadDialogModules = findAllModules((e) => e.WithBottomSeparator);
+// TODO: maybe use if it's still like this, idk
+const timelineScrollModules = findAllModules((e) => e.TimelineScrollContainer);
 
 /**
  * Special children that can not be easily identified.
  */
 specialModules = {
 	gamepaddialog: gamepadDialogModules[0],
+	cliptimelinescroll: timelineScrollModules.find(
+		(e) =>
+			!e.thumbnailWidth &&
+			!e.ContentAndGradient &&
+			!e.gradient &&
+			!e.IsLive &&
+			!e.Faded &&
+			!e.TimelineRelativeDate &&
+			!e.GameModeMarker &&
+			!e.Minor,
+	),
 	cloudfileuploadbutton: findAllModules((e) => e.Ctn)[1],
 	// TODO: is this even used ?
 	controllerconfiguratorgyrocalibrationdialog: findModule(
@@ -58,6 +71,8 @@ specialModules = {
 					return "broadcastplayer";
 				case exists("StoreSaleImage_mini"):
 					return "broadcastwidgets";
+				case exists("ClipUploadStatus"):
+					return "clipupload";
 				case exists("NotesPagedSettings"):
 					return "gamenotes";
 				case exists("GameNotesPopup"):
@@ -183,6 +198,21 @@ exportedModules = [
 	["claimitemshared", (e) => e.DialogCtn],
 	["clanimagechooser", (e) => e.ImagesOuterContainer],
 	["clanimagepickandresize", (e) => e.Image && Object.keys(e).length === 1],
+	["clipgolive", (e) => e.GoLiveButton],
+	["clipmanager", (e) => e.ClipActions],
+	["clipplayback", (e) => e.PlaybackControlsCtn],
+	["clipplayheadghost", (e) => e.GhostPlayheadCtn],
+	["clipplaybacktimeline", (e) => e.ScrollBarCtn],
+	["clipplayhead", (e) => e.PlayHeadContainer && !e.FullMask],
+	["clipsbutton", (e) => e.ClipsButtonContainer],
+	["cliptimeline", (e) => e.GamepadTimelineContainer],
+	["cliptimelinebuffer", (e) => e.LiveRecordingBuffer],
+	["cliptimelinecontextmenu", (e) => e.TimelineContextMenuItem],
+	["cliptimelinegamemode", (e) => e.GameModeMarker],
+	["cliptimelinemarker", (e) => e.MarkerBacking],
+	["cliptimelinemarkercontainer", (e) => e.TimelineMarkerCtn],
+	["cliptimelinerelativedate", (e) => e.TimelineRelativeDate],
+	["cliptimelinetick", (e) => e.TimeTick],
 	["cloudconflict", (e) => e.ConflictChoiceText],
 	["cloudfileuploadprogress", (e) => e.UploadPreviewContainer],
 	["collapseicon", (e) => e.CollapseIconParent],
@@ -214,7 +244,7 @@ exportedModules = [
 		(e) => e.VisualizerCenterXOffset,
 	],
 	["controllersettings", (e) => e.ControllerName],
-	["controllersettings_devicecalibration", (e) => e.VisualizerContainer],
+	["controllersettings_devicecalibration", (e) => e.CalibrationButton],
 	["creatorhomeembed", (e) => e.DevSummaryCtn],
 	["cropmodal", (e) => e.CropImage],
 	["cssgrid", (e) => e.CSSGrid],
@@ -304,6 +334,10 @@ exportedModules = [
 	["gamepadui_svg_library", (e) => e.WifiBar1],
 	["gamepaduiappoverlay", (e) => e.OverlayPosition],
 	["gamepaduiappoverlayvirtualmenucontainer", (e) => e.VirtualMenuContainer],
+	["gamerecordingdesktopdialog", (e) => e.GameRecordingDesktopDialog],
+	["gamerecordingplayer", (e) => e.GameRecordingPlayer],
+	["gamerecordingplayermouselistener", (e) => e.MouseListenerContainer],
+	["gamerecordingsettings", (e) => e.RecordingMode],
 	["guidedtour", (e) => e.PageIndicator],
 	["gyroscopenoisebar", (e) => e.RotateChilden],
 	["hardwaresurveydialog", (e) => e.HardwareSurveySections],
@@ -380,7 +414,8 @@ exportedModules = [
 	["overlaybrowser", (e) => e.OverlayBrowserContainer],
 	["overlaydialogs", (e) => e.Invited],
 	["overlayguides", (e) => e.GuidesHomeHeaderDesc],
-	["overlaytimer", (e) => e.Seconds],
+	["overlaytimeline", (e) => e.OverlayPopup && !e.BackgroundRecording],
+	["overlaytimer", (e) => e.OverlayClock],
 	["pageablecontainer", (e) => e.HeaderPageControls],
 	["pagedcontent", (e) => e.NavTitle],
 	[
@@ -429,11 +464,14 @@ exportedModules = [
 	["reportaicontentdialog", (e) => e.ReportText],
 	["reportitem", (e) => e.DMCA],
 	["requestplaytime", (e) => e.ErrorText && Object.keys(e).length === 1],
-	["resetcollectionsdialog", (e) => e.AfterResetSummary],
 	["rootmenu", (e) => e.RootMenuButton],
 	["salebanner", (e) => e.Big],
 	["salepreviewwidgets", (e) => e.StoreSaleWidgetContainer],
 	["savecollectiondialog", (e) => e.SaveCollectionContainer],
+	[
+		"screenshotmanagercontainer",
+		(e) => e.OverlayContainer && e.SpacingContainer,
+	],
 	["screenshotmanagerdialog", (e) => e.ScreenshotFormRow],
 	["screenshotpopout", (e) => e.PopupScreenshotModal],
 	["screenshots", (e) => e.ClickableScreenshot],
@@ -474,7 +512,7 @@ exportedModules = [
 	["steamdeckbootupthrobber", (e) => e.MoviePlaying],
 	["steamdeckcompatfilter", (e) => e.SelectedFilterOption],
 	["steamdesktop", (e) => e.FocusBar],
-	["steamdesktopoverlay", (e) => e.BackToGameBtn],
+	["steamdesktopoverlay", (e) => e.OverlayPopup && !e.BackgroundRecording],
 	["steamos", (e) => e.DestructiveActionButtonIcon],
 	["steamtemplates", (e) => e.AllNotificationsCommentPlus],
 	["suggestdialog", (e) => e.mentionSearchText],
@@ -501,13 +539,10 @@ exportedModules = [
 	["vodplayer", (e) => e.BroadcastCtn],
 	["voicechatheadersteamdeck", (e) => e.ActiveCall],
 	["voicesettings", (e) => e.MicrophoneTest],
-	// TODO: fix these 3 for GR update
-	// Generic, but returns 1 module
-	["vrdashboard", (e) => e.FadeRight],
+	["vrdashboard", (e) => e.DashboardBarPopupList],
 	// Generic, but returns 1 module
 	["vrdashboardpopups", (e) => e.PopupRoot],
-	// Generic, but returns 1 module
-	["vrinstalldialog", (e) => e.CheckboxContainer],
+	["vrinstalldialog", (e) => e.CheckboxContainer && !e.Recording],
 	["writereview", (e) => e.WriteReviewContainer],
 	["youtubeembed", (e) => e.DynamicLink_YoutubeViews],
 ];
