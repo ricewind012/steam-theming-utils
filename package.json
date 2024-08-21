@@ -8,11 +8,11 @@
   },
   "type": "module",
   "bin": {
-    "steam-theming-utils": "index.js"
+    "steam-theming-utils": "./src/index.js"
   },
-  "types": "api.d.ts",
+  "types": "./src/api.d.ts",
   "exports": {
-    ".": "./api.js"
+    ".": "./src/api.js"
   },
   "dependencies": {
     "@biomejs/biome": "^1.8.0",
