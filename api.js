@@ -1,10 +1,7 @@
 import cdp from "chrome-remote-interface";
 import path from "node:path";
+import { CDP_FILES_PATH, SCRIPT_PATH } from "./constants.js";
 import { readFile } from "./shared.js";
-
-const packagePath = path.dirname(fileURLToPath(import.meta.url));
-const CDP_FILES_PATH = path.join(packagePath, "cdp");
-const SCRIPT_PATH = path.join(packagePath, "lib");
 
 export const connection = await cdp({
 	host: "127.0.0.1",

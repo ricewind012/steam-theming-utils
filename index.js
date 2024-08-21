@@ -2,7 +2,8 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { connection, readScript, SCRIPT_PATH } from "./shared.js";
+import { connection, readScript } from "./api.js";
+import { SCRIPT_PATH } from "./constants.js";
 
 const files = fs.readdirSync(SCRIPT_PATH).map((e) => e.replace(".js", ""));
 if (!files.some((e) => process.argv[2] === e)) {
