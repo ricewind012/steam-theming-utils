@@ -1,27 +1,3 @@
-function findFirstModule(filter, component) {
-	const modules = findAllModules(filter);
-	const printError = (msg) => {
-		console.error("[%s] %s", component, msg);
-	};
-
-	if (modules.length === 0) {
-		printError("found no modules");
-	}
-	if (modules.length > 1) {
-		printError("found more than 1 module, returning first found");
-	}
-
-	return modules[0];
-}
-
-/**
- * Used only for usage in DevTools to identify modules easier.
- */
-findUniqueKey = (key, index = 0) =>
-	Object.keys(findAllModules((mod) => mod[key])[index]).find(
-		(mod) => findAllModules((mod2) => mod2[mod]).length === 1,
-	);
-
 classModules = {
 	...specialModules,
 	...parsedModules

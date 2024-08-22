@@ -34,3 +34,30 @@ const allModules = Object.values(webpackCache).filter((e) => {
 
 const findModule = (filter) => allModules.find(filter);
 const findAllModules = (filter) => allModules.filter(filter);
+
+function findFirstModule(filter, component) {
+	const modules = findAllModules(filter);
+	const printError = (msg) => {
+		console.error("[%s] %s", component, msg);
+	};
+
+	if (modules.length === 0) {
+		printError("found no modules");
+	}
+	if (modules.length > 1) {
+		printError("found more than 1 module, returning first found");
+	}
+
+	return modules[0];
+}
+
+/**
+ * Find a unique class name from multiple similiar class modules.
+ *
+ * @param key Class name.
+ * @param index Array index.
+ */
+const findUniqueKey = (key, index = 0) =>
+	Object.keys(findAllModules((mod) => mod[key])[index]).find(
+		(mod) => findAllModules((mod2) => mod2[mod]).length === 1,
+	);
