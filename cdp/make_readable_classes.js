@@ -24,10 +24,18 @@ function normalizeElement(el) {
 	el.setAttribute("data-readableclass", `\n${readableClasses}\n`);
 }
 
-focusedPopup = [...g_PopupManager.GetPopups()].find((e) => e.focused);
-if (focusedPopup) {
-	const elements = focusedPopup.m_popup.document.querySelectorAll("[class]");
+function onFocus({ target }) {
+	const elements = target.document.querySelectorAll("[class]");
 	for (const el of elements) {
 		normalizeElement(el);
 	}
+
+	for (const popup of popups) {
+		popup.removeEventListener("focus", onFocus);
+	}
+}
+
+popups = [...g_PopupManager.GetPopups()].map((e) => e.m_popup);
+for (const popup of popups) {
+	popup.addEventListener("focus", onFocus);
 }
