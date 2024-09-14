@@ -15,7 +15,7 @@
     ".": "./src/api.js"
   },
   "dependencies": {
-    "@biomejs/biome": "^1.8.0",
+    "@biomejs/biome": "^1.9.0",
     "chrome-remote-interface": "^0.33.2",
     "postcss": "^8.4.39",
     "postcss-load-config": "^6.0.1"
