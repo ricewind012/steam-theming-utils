@@ -8,5 +8,8 @@ const packagePath = path
 	.join(path.sep);
 
 export const CDP_FILES_PATH = path.join(packagePath, "cdp");
-export const CLASS_MAP_FILE = "class_map.json";
 export const SCRIPT_PATH = path.join(packagePath, "lib");
+
+export const PAGES = {
+	profileedit: "SteamIDEditPage",
+};

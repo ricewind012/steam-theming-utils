@@ -24,18 +24,25 @@ function normalizeElement(el) {
 	el.setAttribute("data-readableclass", `\n${readableClasses}\n`);
 }
 
-function onFocus({ target }) {
+function main({ target }) {
 	const elements = target.document.querySelectorAll("[class]");
 	for (const el of elements) {
 		normalizeElement(el);
 	}
 
-	for (const popup of popups) {
-		popup.removeEventListener("focus", onFocus);
+	if (inClient) {
+		for (const popup of popups) {
+			popup.removeEventListener("focus", main);
+		}
 	}
 }
 
-popups = [...g_PopupManager.GetPopups()].map((e) => e.m_popup);
-for (const popup of popups) {
-	popup.addEventListener("focus", onFocus);
+inClient = !!SteamClient.User;
+if (inClient) {
+	window.popups = [...g_PopupManager.GetPopups()].map((e) => e.m_popup);
+	for (const popup of popups) {
+		popup.addEventListener("focus", main);
+	}
+} else {
+	main({ target: window });
 }

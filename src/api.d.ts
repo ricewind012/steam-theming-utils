@@ -1,7 +1,8 @@
+import type CDP from "chrome-remote-interface";
 import type Protocol from "devtools-protocol";
 
 interface Script {
-	execute(): Promise<void>;
+	execute(arg?: string): Promise<void>;
 }
 
 /**
@@ -23,6 +24,7 @@ export function readScript(name: ScriptFile): Promise<Script>;
  */
 export function run(
 	expression: string,
+	conn?: CDP.Client,
 ): Promise<Protocol.Runtime.EvaluateResponse>;
 
 /**
@@ -30,6 +32,7 @@ export function run(
  */
 export function runCdpFile(
 	file: ScriptFile,
+	conn?: CDP.Client,
 ): Promise<Protocol.Runtime.EvaluateResponse>;
 
 /**
@@ -38,6 +41,9 @@ export function runCdpFile(
  *
  * @param expression JS to run.
  */
-export function runWithResult(expression: string): Promise<any>;
+export function runWithResult(
+	expression: string,
+	conn?: CDP.Client,
+): Promise<any>;
 
 export function sleep(ms: number): Promise<void>;

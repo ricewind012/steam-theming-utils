@@ -1,6 +1,7 @@
 let initReq;
 const webpackCache = {};
-window.webpackChunksteamui.push([
+const webpackGlobal = Object.keys(window).find((e) => e.startsWith("webpack"));
+window[webpackGlobal].push([
 	[Math.random()],
 	{},
 	(r) => {

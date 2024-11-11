@@ -1,4 +1,4 @@
 node_modules
 
-class_map.json
-old_class_map.json
+class_map_*
+old_class_map_*

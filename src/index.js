@@ -23,5 +23,5 @@ connection.Runtime.on("consoleAPICalled", (ev) => {
 });
 
 const script = await readScript(process.argv[2]);
-await script.execute();
+await script.execute(process.argv[3]);
 connection.close();

@@ -1,8 +1,8 @@
 classModules = {
-	...specialModules,
-	...parsedModules
-		.map((e) => ({ [e[0]]: e[1] }))
-		.reduce((a, b) => Object.assign(a, b)),
+	...(window.specialModules || {}),
+	...(window.parsedModules
+		?.map((e) => ({ [e[0]]: e[1] }))
+		.reduce((a, b) => Object.assign(a, b)) || {}),
 	...exportedModules
 		.flatMap((a) => {
 			const mod = findFirstModule(a[1], a[0]);
