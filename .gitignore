@@ -1,4 +1,2 @@
 node_modules
-
-class_map_*
-old_class_map_*
+class_maps

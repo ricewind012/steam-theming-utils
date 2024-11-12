@@ -1,9 +1,19 @@
 import cdp from "chrome-remote-interface";
 import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { lilconfig } from "lilconfig";
 import { runWithResult } from "./api.js";
-import { PAGES } from "./constants.js";
+import { DEFAULT_CONFIG, PAGES } from "./constants.js";
 
-export const buildMapFileName = (page) => `class_map_${page}.json`;
+export const packagePath = path
+	.dirname(fileURLToPath(import.meta.url))
+	.split(path.sep)
+	.slice(0, -1)
+	.join(path.sep);
+
+export const getConfig = async () =>
+	(await lilconfig("steam-theming-utils").search())?.config || DEFAULT_CONFIG;
 export const readFile = (file) => fs.readFileSync(file).toString();
 
 export const selectorReplacerPlugin = (opts) => (css) => {
