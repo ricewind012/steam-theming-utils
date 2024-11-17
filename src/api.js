@@ -1,6 +1,7 @@
 import cdp from "chrome-remote-interface";
+import { lilconfig } from "lilconfig";
 import path from "node:path";
-import { CDP_FILES_PATH, SCRIPT_PATH } from "./constants.js";
+import { CDP_FILES_PATH, DEFAULT_CONFIG, SCRIPT_PATH } from "./constants.js";
 import { readFile } from "./shared.js";
 
 export const connection = await cdp({
@@ -17,8 +18,11 @@ export const connection = await cdp({
 	process.exit(1);
 });
 
+export const getConfig = async () =>
+	(await lilconfig("steam-theming-utils").search())?.config || DEFAULT_CONFIG;
 export const readScript = async (name) =>
 	await import(`file://${path.join(SCRIPT_PATH, `${name}.js`)}`);
+
 export const run = async (expression, conn = connection) =>
 	await conn.Runtime.evaluate({
 		expression,

@@ -1,6 +1,25 @@
 import type CDP from "chrome-remote-interface";
 import type Protocol from "devtools-protocol";
 
+export interface Config {
+	paths: {
+		/**
+		 * Path of built class maps.
+		 */
+		classMaps: string;
+
+		/**
+		 * Path of built CSS you can point your theme to.
+		 */
+		dist: string;
+
+		/**
+		 * Path of the theme's source code.
+		 */
+		src: string;
+	};
+}
+
 interface Script {
 	execute(arg?: string): Promise<void>;
 }
@@ -13,6 +32,8 @@ type ScriptFile =
 	| "build_theme"
 	| "make_readable_classes"
 	| "replace_old_classes";
+
+export function getConfig(): Promise<Config>;
 
 /**
  * @param file The script to read.
