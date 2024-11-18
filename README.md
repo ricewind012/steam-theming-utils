@@ -13,11 +13,19 @@ Note that running any script requires Steam running with `-cef-enable-debugging`
 
 ## Script list
 
-| Name                  | Description                                                                                     |
-| --------------------- | ----------------------------------------------------------------------------------------------- |
-| build_class_modules   | Generates a `class_map.json` file for usage with other scripts.                                 |
-| build_theme           | Builds the theme. Requires a [specific directory structure][template].                          |
-| make_readable_classes | Adds readable versions of classes to the focused window. ![Preview](./img/readable_classes.png) |
-| replace_old_classes   | Replaces old classes with new ones for themes not using the [template][template].               |
+| Name                  | Description                                                                          |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| build_class_modules   | Generates a class map file for usage with other scripts.                             |
+| build_theme           | Builds the theme to be usable by Steam.                                              |
+| make_readable_classes | Adds readable versions of classes to the focused window. ![Preview][classes-preview] |
+| replace_old_classes   | Replaces old classes with new ones for themes not using the [template][template].    |
 
+## Config
+
+Usage [here][usage], docs [here][config-docs], defaults [here][config-defaults].
+
+[classes-preview]: ./img/readable_classes.png
+[config-defaults]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/constants.js#L7-L13
+[config-docs]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/api.d.ts#L4-L21
 [template]: https://github.com/ricewind012/more-advanced-theme-template
+[usage]: https://github.com/cosmiconfig/cosmiconfig#usage-for-end-users
