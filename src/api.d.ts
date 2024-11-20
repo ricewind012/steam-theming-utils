@@ -14,9 +14,15 @@ export interface Config {
 		dist: string;
 
 		/**
-		 * Path of the theme's source code.
+		 * Various paths of the theme's source code.
+		 *
+		 * All paths here are going to be the same in the `dist` key,
+		 * i.e. `src/client/rootmenu.css` -> `dist/client/rootmenu.css`.
 		 */
-		src: string;
+		src: {
+			client: string;
+			profileedit: string;
+		};
 	};
 }
 
