@@ -22,13 +22,31 @@ selectorReplacerPlugin.postcss = true;
 
 export const getPageUrl = async (page) =>
 	await runWithResult(`urlStore.ResolveURL("${PAGES[page]}")`);
-export async function createWebConnection(page) {
-	const url = await getPageUrl(page);
+
+export async function createConnection(target) {
 	const connection = await cdp({
 		host: "127.0.0.1",
 		port: 8080,
-		target: (e) => e.find((e) => e.url.startsWith(url)),
+		target,
 	});
+
+	await connection.Runtime.enable();
+	connection.Runtime.on("consoleAPICalled", (ev) => {
+		if (ev.type !== "error") {
+			return;
+		}
+
+		console.error(...ev.args.map((e) => e.description || e.value));
+	});
+
+	return connection;
+}
+
+export async function createWebConnection(page) {
+	const url = await getPageUrl(page);
+	const connection = await createConnection((e) =>
+		e.find((e) => e.url.startsWith(url)),
+	);
 
 	return connection;
 }

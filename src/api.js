@@ -1,14 +1,11 @@
-import cdp from "chrome-remote-interface";
 import { lilconfig } from "lilconfig";
 import path from "node:path";
 import { CDP_FILES_PATH, DEFAULT_CONFIG, SCRIPT_PATH } from "./constants.js";
-import { readFile } from "./shared.js";
+import { createConnection, readFile } from "./shared.js";
 
-export const connection = await cdp({
-	host: "127.0.0.1",
-	port: 8080,
-	target: (e) => e.find((e) => e.title === "SharedJSContext"),
-}).catch((e) => {
+export const connection = await createConnection((e) =>
+	e.find((e) => e.title === "SharedJSContext"),
+).catch((e) => {
 	console.log(
 		"%s\n%s %o",
 		e.message,

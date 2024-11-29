@@ -13,15 +13,6 @@ if (!files.some((e) => process.argv[2] === e)) {
 	process.exit(2);
 }
 
-await connection.Runtime.enable();
-connection.Runtime.on("consoleAPICalled", (ev) => {
-	if (ev.type !== "error") {
-		return;
-	}
-
-	console.error(...ev.args.map((e) => e.description || e.value));
-});
-
 const script = await readScript(process.argv[2]);
 await script.execute(process.argv[3]);
 connection.close();
