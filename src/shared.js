@@ -20,8 +20,8 @@ export const selectorReplacerPlugin = (opts) => (css) => {
 };
 selectorReplacerPlugin.postcss = true;
 
-export const getPageUrl = async (page) =>
-	await runWithResult(`urlStore.ResolveURL("${PAGES[page]}")`);
+export const getPageUrl = (page) =>
+	runWithResult(`urlStore.ResolveURL("${PAGES[page]}")`);
 
 export async function createConnection(target) {
 	const connection = await cdp({

@@ -17,17 +17,17 @@ export const connection = await createConnection((e) =>
 
 export const getConfig = async () =>
 	(await lilconfig("steam-theming-utils").search())?.config || DEFAULT_CONFIG;
-export const readScript = async (name) =>
-	await import(`file://${path.join(SCRIPT_PATH, `${name}.js`)}`);
+export const readScript = (name) =>
+	import(`file://${path.join(SCRIPT_PATH, `${name}.js`)}`);
 
-export const run = async (expression, conn = connection) =>
-	await conn.Runtime.evaluate({
+export const run = (expression, conn = connection) =>
+	conn.Runtime.evaluate({
 		expression,
 		awaitPromise: true,
 		returnByValue: true,
 	});
-export const runCdpFile = async (file, conn = connection) =>
-	await runWithResult(readFile(path.join(CDP_FILES_PATH, file)), conn);
+export const runCdpFile = (file, conn = connection) =>
+	runWithResult(readFile(path.join(CDP_FILES_PATH, file)), conn);
 export const runWithResult = async (expression, conn = connection) =>
 	(await run(expression, conn)).result.value;
 
