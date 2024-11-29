@@ -46,7 +46,16 @@ export async function createWebConnection(page) {
 	const url = await getPageUrl(page);
 	const connection = await createConnection((e) =>
 		e.find((e) => e.url.startsWith(url)),
-	);
+	).catch((e) => {
+		console.log(
+			"%s\n%s %o %s",
+			e.message,
+			"No page whose URL starts with",
+			url,
+			"has been found.",
+		);
+		process.exit(1);
+	});
 
 	return connection;
 }
