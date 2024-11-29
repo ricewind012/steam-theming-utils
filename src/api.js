@@ -1,5 +1,5 @@
-import { lilconfig } from "lilconfig";
 import path from "node:path";
+import { lilconfig } from "lilconfig";
 import { CDP_FILES_PATH, DEFAULT_CONFIG, SCRIPT_PATH } from "./constants.js";
 import { createConnection, readFile } from "./shared.js";
 
@@ -7,9 +7,8 @@ export const connection = await createConnection((e) =>
 	e.find((e) => e.title === "SharedJSContext"),
 ).catch((e) => {
 	console.log(
-		"%s\n%s %o",
+		"%s\nTry running Steam with %o",
 		e.message,
-		"Try running Steam with",
 		"-cef-enable-debugging",
 	);
 	process.exit(1);

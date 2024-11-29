@@ -1,7 +1,7 @@
-import cdp from "chrome-remote-interface";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import cdp from "chrome-remote-interface";
 import { runWithResult } from "./api.js";
 import { PAGES } from "./constants.js";
 
@@ -48,11 +48,9 @@ export async function createWebConnection(page) {
 		e.find((e) => e.url.startsWith(url)),
 	).catch((e) => {
 		console.log(
-			"%s\n%s %o %s",
+			"%s\nNo page whose URL starts with %o has been found.",
 			e.message,
-			"No page whose URL starts with",
 			url,
-			"has been found.",
 		);
 		process.exit(1);
 	});
