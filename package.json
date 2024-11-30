@@ -15,10 +15,10 @@
     ".": "./src/api.js"
   },
   "dependencies": {
-    "@biomejs/biome": "^1.9.0",
     "chrome-remote-interface": "^0.33.2",
     "lilconfig": "^3.1.2",
     "postcss": "^8.4.39",
-    "postcss-load-config": "^6.0.1"
+    "postcss-load-config": "^6.0.1",
+    "prettier": "^3.4.1"
   }
 }
