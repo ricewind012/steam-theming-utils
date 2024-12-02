@@ -1,5 +1,6 @@
 import type CDP from "chrome-remote-interface";
 import type Protocol from "devtools-protocol";
+import type sass from "sass";
 
 export interface Config {
 	paths: {
@@ -23,6 +24,23 @@ export interface Config {
 			client: string;
 			profileedit: string;
 		};
+	};
+	sass: {
+		/**
+		 * Whether to use sass.
+		 */
+		use: boolean;
+
+		/**
+		 * Sass options.
+		 *
+		 * Note that PostCSS is still the one controlling source maps,
+		 * so enable it there instead.
+		 *
+		 * @todo Change `LegacyOptions` to `Options` when
+		 *       `@csstools/postcss-sass` changes to the normal API.
+		 */
+		options: sass.LegacyOptions<"async">;
 	};
 }
 

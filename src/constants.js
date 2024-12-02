@@ -15,6 +15,10 @@ export const DEFAULT_CONFIG = {
 			profileedit: path.join(WEB_DIR, "profileedit"),
 		},
 	},
+	sass: {
+		use: true,
+		options: undefined,
+	},
 };
 
 export const PAGES = {
