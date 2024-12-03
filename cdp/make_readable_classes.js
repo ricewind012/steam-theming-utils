@@ -21,7 +21,7 @@ function normalizeElement(el) {
 		return;
 	}
 
-	el.setAttribute("data-readableclass", `\n${readableClasses}\n`);
+	el.dataset.readableClass = `\n${readableClasses}\n`;
 }
 
 function main({ target }) {
