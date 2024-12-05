@@ -11,6 +11,26 @@ $ npx steam-theming-utils <script> <page>
 
 Note that running any script requires Steam running with `-cef-enable-debugging`.
 
+### Example
+
+Generate a class map file for the profile edit page (This has to be done on each update):
+
+```sh
+$ npx steam-theming-utils build_class_modules profileedit
+```
+
+Add readable classes there:
+
+```sh
+$ npx steam-theming-utils make_readable_classes profileedit
+```
+
+Write something and build the theme:
+
+```sh
+$ npx steam-theming-utils build_theme profileedit
+```
+
 ## Scripts
 
 | Name                  | Description                                                                               |
