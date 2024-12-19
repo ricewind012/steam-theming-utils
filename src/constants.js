@@ -20,7 +20,3 @@ export const DEFAULT_CONFIG = {
 		options: undefined,
 	},
 };
-
-export const PAGES = {
-	profileedit: "SteamIDEditPage",
-};

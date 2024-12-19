@@ -3,7 +3,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import cdp from "chrome-remote-interface";
 import { runWithResult } from "./api.js";
-import { PAGES } from "./constants.js";
 
 export const packagePath = path
 	.dirname(fileURLToPath(import.meta.url))
@@ -20,8 +19,12 @@ export const selectorReplacerPlugin = (opts) => (css) => {
 };
 selectorReplacerPlugin.postcss = true;
 
-export const getPageUrl = (page) =>
-	runWithResult(`urlStore.ResolveURL("${PAGES[page]}")`);
+export function getPageUrl(page) {
+	switch (page) {
+		case "profileedit":
+			return runWithResult("urlStore.ResolveURL('SteamIDEditPage')");
+	}
+}
 
 export async function createConnection(target) {
 	const connection = await cdp({
@@ -46,14 +49,7 @@ export async function createWebConnection(page) {
 	const url = await getPageUrl(page);
 	const connection = await createConnection((e) =>
 		e.find((e) => e.url.startsWith(url)),
-	).catch((e) => {
-		console.log(
-			"%s\nNo page whose URL starts with %o has been found.",
-			e.message,
-			url,
-		);
-		process.exit(1);
-	});
+	);
 
 	return connection;
 }
