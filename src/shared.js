@@ -28,6 +28,9 @@ export async function getPageUrl(page) {
 			return resolve("StoreAccount");
 		case "gameslist":
 			return `${profileUrl}games`;
+		// resolve("AllNotifications"), but the steam id is "%p1"
+		case "notificationspage":
+			return `${profileUrl}notifications`;
 		case "profileedit":
 			return resolve("SteamIDEditPage");
 	}
