@@ -21,6 +21,8 @@ selectorReplacerPlugin.postcss = true;
 
 export async function getPageUrl(page) {
 	const resolve = (name) => runWithResult(`urlStore.ResolveURL("${name}")`);
+	const resolveSub = async (name, sub) =>
+		(await resolve(name)).replace("%p1%", sub);
 	const profileUrl = await resolve("SteamIDMyProfile");
 
 	switch (page) {
@@ -33,6 +35,8 @@ export async function getPageUrl(page) {
 			return `${profileUrl}notifications`;
 		case "profileedit":
 			return resolve("SteamIDEditPage");
+		case "shoppingcart":
+			return resolve("StoreCart");
 	}
 }
 
