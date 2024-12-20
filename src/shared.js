@@ -19,8 +19,14 @@ export const selectorReplacerPlugin = (opts) => (css) => {
 };
 selectorReplacerPlugin.postcss = true;
 
-export function getPageUrl(page) {
+export async function getPageUrl(page) {
+	const profileUrl = await runWithResult(
+		"urlStore.ResolveURL('SteamIDMyProfile')",
+	);
+
 	switch (page) {
+		case "gameslist":
+			return `${profileUrl}games`;
 		case "profileedit":
 			return runWithResult("urlStore.ResolveURL('SteamIDEditPage')");
 	}
