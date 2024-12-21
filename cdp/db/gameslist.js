@@ -5,6 +5,6 @@ exportedModules = [
 	["entry", (e) => e.GamesListItemContainer],
 	["search", (e) => e.SearchIcon],
 	["rareachievementglow", (e) => e.RareAchievementIconGlowContainerRoot],
-	["remotedownload", (e) => e.RemoteDownloadHeader],
+	["remote", (e) => e.RemoteDownloadHeader],
 	["tabs", (e) => e.TabBaseline],
 ];

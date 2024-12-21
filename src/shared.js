@@ -64,7 +64,7 @@ export async function createConnection(target) {
 export async function createWebConnection(page) {
 	const url = await getPageUrl(page);
 	const connection = await createConnection((e) =>
-		e.find((e) => e.url.startsWith(url)),
+		e.find((e) => e.url.startsWith(url.replace(/\/+$/, ""))),
 	);
 
 	return connection;
