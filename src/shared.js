@@ -37,6 +37,8 @@ export async function getPageUrl(page) {
 			return resolve("SteamIDEditPage");
 		case "shoppingcart":
 			return resolve("StoreCart");
+		case "storeitemscarousel":
+			return "https://store.steampowered.com/app";
 	}
 }
 
