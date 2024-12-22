@@ -22,7 +22,7 @@ selectorReplacerPlugin.postcss = true;
 
 export async function getPageUrl(page) {
 	const resolve = (name) => runWithResult(`urlStore.ResolveURL("${name}")`);
-	const ass = (url) => ({
+	const pageObj = (url) => ({
 		url,
 		match: new RegExp(`^${url.replace(/\/+$/, "")}`),
 	});
@@ -35,14 +35,13 @@ export async function getPageUrl(page) {
 				match: new RegExp(`^${STORE_BASE_URL}/account`),
 			};
 		case "gameslist":
-			return ass(`${profileUrl}games`);
-		// resolve("AllNotifications"), but the steam id is "%p1"
+			return pageObj(`${profileUrl}games`);
 		case "notificationspage":
-			return ass(`${profileUrl}notifications`);
+			return pageObj(`${profileUrl}notifications`);
 		case "profileedit":
-			return ass(await resolve("SteamIDEditPage"));
+			return pageObj(await resolve("SteamIDEditPage"));
 		case "shoppingcart":
-			return ass(await resolve("StoreCart"));
+			return pageObj(await resolve("StoreCart"));
 		case "storeitemscarousel":
 			return {
 				url: `${STORE_BASE_URL}/app/666220`,
