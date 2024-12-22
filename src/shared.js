@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import cdp from "chrome-remote-interface";
 import { runWithResult } from "./api.js";
+import { STORE_BASE_URL } from "./constants.js";
 
 export const packagePath = path
 	.dirname(fileURLToPath(import.meta.url))
@@ -21,24 +22,32 @@ selectorReplacerPlugin.postcss = true;
 
 export async function getPageUrl(page) {
 	const resolve = (name) => runWithResult(`urlStore.ResolveURL("${name}")`);
-	const resolveSub = async (name, sub) =>
-		(await resolve(name)).replace("%p1%", sub);
-	const profileUrl = await resolve("SteamIDMyProfile");
+	const ass = (url) => ({
+		url,
+		match: new RegExp(`^${url.replace(/\/+$/, "")}`),
+	});
 
+	const profileUrl = await resolve("SteamIDMyProfile");
 	switch (page) {
 		case "accountpreferences":
-			return resolve("StoreAccount");
+			return {
+				url: await resolve("FamilyManagement"),
+				match: new RegExp(`^${STORE_BASE_URL}/account`),
+			};
 		case "gameslist":
-			return `${profileUrl}games`;
+			return ass(`${profileUrl}games`);
 		// resolve("AllNotifications"), but the steam id is "%p1"
 		case "notificationspage":
-			return `${profileUrl}notifications`;
+			return ass(`${profileUrl}notifications`);
 		case "profileedit":
-			return resolve("SteamIDEditPage");
+			return ass(await resolve("SteamIDEditPage"));
 		case "shoppingcart":
-			return resolve("StoreCart");
+			return ass(await resolve("StoreCart"));
 		case "storeitemscarousel":
-			return "https://store.steampowered.com/app";
+			return {
+				url: `${STORE_BASE_URL}/app/666220`,
+				match: new RegExp(`^${STORE_BASE_URL}/app/\\d+`),
+			};
 	}
 }
 
@@ -62,9 +71,9 @@ export async function createConnection(target) {
 }
 
 export async function createWebConnection(page) {
-	const url = await getPageUrl(page);
+	const { match } = await getPageUrl(page);
 	const connection = await createConnection((e) =>
-		e.find((e) => e.url.startsWith(url.replace(/\/+$/, ""))),
+		e.find((e) => e.url.match(match)),
 	);
 
 	return connection;

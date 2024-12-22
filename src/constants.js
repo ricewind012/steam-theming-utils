@@ -20,3 +20,5 @@ export const DEFAULT_CONFIG = {
 		options: undefined,
 	},
 };
+
+export const STORE_BASE_URL = "https://store.steampowered.com";

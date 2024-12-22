@@ -1,3 +1,4 @@
+// Note that every module is only available on the "family management" page.
 exportedModules = [
 	["authorizeddevices", (e) => e.AuthorizedDeviceGroup],
 	["cookies", (e) => e.CookieSection],
@@ -5,4 +6,6 @@ exportedModules = [
 	["familymanagementtabs", (e) => e.GraphicalAssetsTabs],
 	// TODO: shared with steam settings notif page
 	["notifications", (e) => e.NotificationSection],
+	// TODO: gamepaddialog
+	["toggle", (e) => e.Field],
 ];
