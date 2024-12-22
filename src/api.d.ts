@@ -24,6 +24,17 @@ export interface Config {
 			client: string;
 			profileedit: string;
 		};
+
+		/**
+		 * An array of dirs to ignore.
+		 *
+		 * For example:
+		 * `{ client: ["shared"] }` will ignore `src/client/shared`,
+		 * assuming the `src.client` key is set to `src/client`.
+		 */
+		ignore: {
+			[page: string]: string[];
+		};
 	};
 	sass: {
 		/**

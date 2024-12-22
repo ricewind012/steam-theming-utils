@@ -14,6 +14,7 @@ export const DEFAULT_CONFIG = {
 			client: path.join(SRC_DIR, "client"),
 			profileedit: path.join(WEB_DIR, "profileedit"),
 		},
+		ignore: {},
 	},
 	sass: {
 		use: true,
