@@ -44,14 +44,9 @@ specialModules = {
 	window.parsedModules = [
 		...(
 			await Promise.all(
-				[
-					"awardicon",
-					"broadcast",
-					"chunk~1a96cdf59", // Also broadcast
-					"gamenotes",
-					"gamerecording",
-				].map(async (e) =>
-					(await fetch(`https://steamloopback.host/${e}.js`)).text(),
+				["awardicon", "broadcast", "gamenotes", "gamerecording"].map(
+					async (e) =>
+						(await fetch(`https://steamloopback.host/${e}.js`)).text(),
 				),
 			)
 		)
@@ -67,8 +62,6 @@ specialModules = {
 					return "awardicon";
 				case exists("PopOutVideoTitleBar"):
 					return "broadcastembeddable";
-				case exists("BroadcastPlayerLite"):
-					return "broadcastplayer";
 				case exists("StoreSaleImage_mini"):
 					return "broadcastwidgets";
 				case exists("ClipUploadStatus"):
@@ -179,6 +172,7 @@ exportedModules = [
 	["broadcastchat", (e) => e.BroadcastChat],
 	["broadcastchatannouncement", (e) => e.GiveawayWinnerBox],
 	["broadcastfirsttime", (e) => e.BroadcastFirstTimeDialog],
+	["broadcastplayer", (e) => e.BroadcastPlayerLite],
 	["broadcastsettings", (e) => e.ConfigureMic],
 	["broadcaststatus", (e) => e.BroadcastStatusBody],
 	["browserviewfindinpage", (e) => e.ControlButton],
