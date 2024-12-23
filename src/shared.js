@@ -34,6 +34,11 @@ export async function getPageUrl(page) {
 				url: await resolve("FamilyManagement"),
 				match: new RegExp(`^${STORE_BASE_URL}/account`),
 			};
+		case "apppage":
+			return {
+				url: `${STORE_BASE_URL}/app/666220`,
+				match: new RegExp(`^${STORE_BASE_URL}/app/\\d+`),
+			};
 		case "gameslist":
 			return pageObj(`${profileUrl}games`);
 		case "notificationspage":
@@ -42,11 +47,6 @@ export async function getPageUrl(page) {
 			return pageObj(await resolve("SteamIDEditPage"));
 		case "shoppingcart":
 			return pageObj(await resolve("StoreCart"));
-		case "storeitemscarousel":
-			return {
-				url: `${STORE_BASE_URL}/app/666220`,
-				match: new RegExp(`^${STORE_BASE_URL}/app/\\d+`),
-			};
 	}
 }
 

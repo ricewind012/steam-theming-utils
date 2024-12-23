@@ -1,6 +1,6 @@
 # steam-theming-utils
 
-A collection of scripts for easier (and futureproof) Steam theming.
+A collection of scripts for easier (and future-proof) Steam theming.
 
 ## Usage
 
@@ -11,24 +11,31 @@ $ npx steam-theming-utils <script> <page>
 
 Note that running any script requires Steam running with `-cef-enable-debugging`.
 
-### Example
+## Examples
 
-Generate a class map file for the profile edit page (This has to be done on each update):
+You may encounter a `#ClassName is undefined` error - this means that class either got renamed or removed, and so you will have to update it yourself.
+
+### #1
+
+Generate a class map file for the client whenever it updates & build the theme:
 
 ```sh
-$ npx steam-theming-utils build_class_modules profileedit
+$ npx steam-theming-utils build_class_modules
+$ npx steam-theming-utils build_theme
 ```
 
-Add readable classes there:
+### #2
+
+Add readable classes on the shopping cart page:
 
 ```sh
-$ npx steam-theming-utils make_readable_classes profileedit
+$ npx steam-theming-utils make_readable_classes shoppingcart
 ```
 
 Write something and build the theme:
 
 ```sh
-$ npx steam-theming-utils build_theme profileedit
+$ npx steam-theming-utils build_theme shoppingcart
 ```
 
 ## Scripts
@@ -42,17 +49,22 @@ $ npx steam-theming-utils build_theme profileedit
 
 ## Pages
 
-| Name        | Description                    |
-| ----------- | ------------------------------ |
-| client      | The Steam client. The default. |
-| profileedit | Your profile edit page.        |
+| Name               | Description                                                                  |
+| ------------------ | ---------------------------------------------------------------------------- |
+| apppage            | Related items & controller info in https://store.steampowered.com/app/666220 |
+| accountpreferences | https://store.steampowered.com/account                                       |
+| client             | The Steam client. The default.                                               |
+| gameslist          | https://steamcommunity.com/my/games                                          |
+| notificationspage  | https://steamcommunity.com/my/notifications                                  |
+| profileedit        | https://steamcommunity.com/my/edit                                           |
+| shoppingcart       | https://store.steampowered.com/cart                                          |
 
 ## Config
 
 Configured through a `steam-theming-utils.config.js` (or the one from [here][config-files]) file that must `export default` an [object][config-docs]. It's optional and has defaults listed [here][config-defaults].
 
 [classes-preview]: ./img/readable_classes.png
-[config-defaults]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/constants.js#L9-L22
-[config-docs]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/api.d.ts#L5-L45
+[config-defaults]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/constants.js#L9-L23
+[config-docs]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/api.d.ts#L5-L55
 [config-files]: https://github.com/cosmiconfig/cosmiconfig#usage-for-end-users
 [template]: https://github.com/ricewind012/more-advanced-theme-template

@@ -21,8 +21,7 @@ export interface Config {
 		 * i.e. `src/client/rootmenu.css` -> `dist/client/rootmenu.css`.
 		 */
 		src: {
-			client: string;
-			profileedit: string;
+			[page: string]: string;
 		};
 
 		/**
