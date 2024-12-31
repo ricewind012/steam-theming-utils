@@ -9,6 +9,8 @@ function getNormalClass(className) {
 
 		return [key, name].join("_");
 	}
+
+	notInDb.push(className);
 }
 
 function normalizeElement(el) {
@@ -35,9 +37,19 @@ function main({ target }) {
 			popup.removeEventListener("focus", main);
 		}
 	}
+
+	if (notInDb.length > 0) {
+		const classes = [...new Set(notInDb)];
+		console.error(
+			"%s classes are not in the classes db: %o",
+			classes.length,
+			classes.sort(),
+		);
+	}
 }
 
 inClient = !!SteamClient.User;
+notInDb = [];
 if (inClient) {
 	window.popups = [...g_PopupManager.GetPopups()].map((e) => e.m_popup);
 	for (const popup of popups) {
