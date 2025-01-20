@@ -468,6 +468,7 @@ exportedModules = [
 	["remainderlist", (e) => e.ItemWrapper],
 	["remoteplay", (e) => e.ContentForm],
 	["remoteplaydialog", (e) => e.SegmentedInput && Object.keys(e).length === 3],
+	["remoteplayexplainerdialog", (e) => e.AppStoreContainer],
 	["remoteplaysettings", (e) => e.SubSetting],
 	["removefreeappdialog", (e) => e.RemovingText],
 	["removegamehover", (e) => e.RemoveBoxTransition],
