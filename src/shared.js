@@ -13,13 +13,6 @@ export const packagePath = path
 
 export const readFile = (file) => fs.readFileSync(file).toString();
 
-export const selectorReplacerPlugin = (opts) => (css) => {
-	css.walkRules((rule) => {
-		rule.selector = rule.selector.replace(opts.match, opts.replace);
-	});
-};
-selectorReplacerPlugin.postcss = true;
-
 /**
  * @typedef {object} SteamPage
  *
@@ -31,6 +24,7 @@ selectorReplacerPlugin.postcss = true;
 
 /**
  * Gets a page URL for a given page name.
+ *
  * @param {import("./api").Page} page
  * @returns {Promise<SteamPage>}
  */
@@ -67,6 +61,7 @@ export async function getPageUrl(page) {
 
 /**
  * Creates a CDP connection for a given target.
+ *
  * @param {(targets: cdp.Target[]) => cdp.Target} target
  */
 export async function createConnection(target) {
@@ -90,6 +85,7 @@ export async function createConnection(target) {
 
 /**
  * Creates a CDP connection for a given page name.
+ *
  * @param {import("./api").Page} page
  */
 export async function createWebConnection(page) {

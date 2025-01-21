@@ -39,6 +39,7 @@ export type Page =
 	| "profileedit"
 	| "shoppingcart";
 
+export declare const connection: CDP.Client;
 export declare const config: Config;
 
 /**

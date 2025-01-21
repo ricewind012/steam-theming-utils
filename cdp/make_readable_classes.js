@@ -1,3 +1,7 @@
+/**
+ * @param {string} className
+ * @returns the readable class name.
+ */
 function getNormalClass(className) {
 	for (const key of Object.keys(classModules)) {
 		const mod = classModules[key];
@@ -13,6 +17,11 @@ function getNormalClass(className) {
 	notInDb.push(className);
 }
 
+/**
+ * Sets readable classes to a `data-readable-class` attribute.
+ *
+ * @param {HTMLElement} el
+ */
 function normalizeElement(el) {
 	const readableClasses = [...el.classList]
 		.map(getNormalClass)
@@ -26,6 +35,9 @@ function normalizeElement(el) {
 	el.dataset.readableClass = `\n${readableClasses}\n`;
 }
 
+/**
+ * @param {FocusEvent}
+ */
 function main({ target }) {
 	const elements = target.document.querySelectorAll("[class]");
 	for (const el of elements) {

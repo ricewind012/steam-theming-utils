@@ -21,6 +21,7 @@ const classMap = {};
 
 /**
  * Gets a class map on demand rather than reading all files at once.
+ *
  * @param {string} page
  */
 function getClassMap(page) {
