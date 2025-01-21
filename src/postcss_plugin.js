@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+// Not a dependency because postcss already depends on it.
 import yargs from "yargs";
 import { getConfig } from "./api.js";
 

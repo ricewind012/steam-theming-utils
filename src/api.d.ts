@@ -28,6 +28,17 @@ type ScriptFile =
 	| "make_readable_classes"
 	| "replace_old_classes";
 
+/**
+ * Pages that have an existing class map, excluding `client`.
+ */
+export type Page =
+	| "accountpreferences"
+	| "apppage"
+	| "gameslist"
+	| "notificationspage"
+	| "profileedit"
+	| "shoppingcart";
+
 export function getConfig(): Promise<Config>;
 
 /**
