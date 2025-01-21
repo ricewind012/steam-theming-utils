@@ -4,22 +4,10 @@ import { packagePath } from "./shared.js";
 export const CDP_FILES_PATH = path.join(packagePath, "cdp");
 export const SCRIPT_PATH = path.join(packagePath, "lib");
 
-const SRC_DIR = "src";
-const WEB_DIR = path.join(SRC_DIR, "web");
+/** @type {import("./api").Config} */
 export const DEFAULT_CONFIG = {
-	paths: {
-		classMaps: "class_maps",
-		dist: "dist",
-		src: {
-			client: path.join(SRC_DIR, "client"),
-			profileedit: path.join(WEB_DIR, "profileedit"),
-		},
-		ignore: {},
-	},
-	sass: {
-		use: true,
-		options: undefined,
-	},
+	classMaps: "class_maps",
+	ignore: [],
 };
 
 export const STORE_BASE_URL = "https://store.steampowered.com";

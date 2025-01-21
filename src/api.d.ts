@@ -1,57 +1,19 @@
 import type CDP from "chrome-remote-interface";
 import type Protocol from "devtools-protocol";
-import type sass from "sass";
 
 export interface Config {
-	paths: {
-		/**
-		 * Path of built class maps.
-		 */
-		classMaps: string;
+	/**
+	 * Path of built class maps.
+	 */
+	classMaps: string;
 
-		/**
-		 * Path of built CSS you can point your theme to.
-		 */
-		dist: string;
-
-		/**
-		 * Various paths of the theme's source code.
-		 *
-		 * All paths here are going to be the same in the `dist` key,
-		 * i.e. `src/client/rootmenu.css` -> `dist/client/rootmenu.css`.
-		 */
-		src: {
-			[page: string]: string;
-		};
-
-		/**
-		 * An array of dirs to ignore.
-		 *
-		 * For example:
-		 * `{ client: ["shared"] }` will ignore `src/client/shared`,
-		 * assuming the `src.client` key is set to `src/client`.
-		 */
-		ignore: {
-			[page: string]: string[];
-		};
-	};
-	sass: {
-		/**
-		 * Whether to use sass.
-		 */
-		use: boolean;
-
-		/**
-		 * Sass options.
-		 *
-		 * Note that PostCSS is still the one controlling source maps,
-		 * so enable it there instead.
-		 *
-		 * @todo Change `LegacyOptions` to `Options` when
-		 *       `@csstools/postcss-sass` changes to the normal API.
-		 */
-		options: sass.LegacyOptions<"async">;
-	};
+	/**
+	 * Directories for the postcss plugin to ignore.
+	 *
+	 * For example: `["client/shared", "web/vars"]` will ignore
+	 * `src/client/shared` and `src/web/vars`, assuming the base dir is `src`.
+	 */
+	ignore: string[];
 }
 
 interface Script {
@@ -63,7 +25,6 @@ interface Script {
  */
 type ScriptFile =
 	| "build_class_modules"
-	| "build_theme"
 	| "make_readable_classes"
 	| "replace_old_classes";
 

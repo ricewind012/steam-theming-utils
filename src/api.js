@@ -3,16 +3,19 @@ import { lilconfig } from "lilconfig";
 import { CDP_FILES_PATH, DEFAULT_CONFIG, SCRIPT_PATH } from "./constants.js";
 import { createConnection, readFile } from "./shared.js";
 
-export const connection = await createConnection((e) =>
-	e.find((e) => e.title === "SharedJSContext"),
-).catch((e) => {
-	console.log(
-		"%s\nTry running Steam with %o",
-		e.message,
-		"-cef-enable-debugging",
-	);
-	process.exit(1);
-});
+// postcss-cli hangs because of cdp
+export const connection =
+	path.basename(process.argv[1]) !== "postcss" &&
+	(await createConnection((e) =>
+		e.find((e) => e.title === "SharedJSContext"),
+	).catch((e) => {
+		console.log(
+			"%s\nTry running Steam with %o",
+			e.message,
+			"-cef-enable-debugging",
+		);
+		process.exit(1);
+	}));
 
 export const getConfig = async () =>
 	(await lilconfig("steam-theming-utils").search())?.config || DEFAULT_CONFIG;

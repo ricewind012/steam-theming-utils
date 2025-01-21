@@ -11,39 +11,11 @@ $ npx steam-theming-utils <script> <page>
 
 Note that running any script requires Steam running with `-cef-enable-debugging`.
 
-## Examples
-
-You may encounter a `#ClassName is undefined` error - this means that class either got renamed or removed, and so you will have to update it yourself.
-
-### #1
-
-Generate a class map file for the client whenever it updates & build the theme:
-
-```sh
-$ npx steam-theming-utils build_class_modules
-$ npx steam-theming-utils build_theme
-```
-
-### #2
-
-Add readable classes on the shopping cart page:
-
-```sh
-$ npx steam-theming-utils make_readable_classes shoppingcart
-```
-
-Write something and build the theme:
-
-```sh
-$ npx steam-theming-utils build_theme shoppingcart
-```
-
 ## Scripts
 
 | Name                  | Description                                                                               |
 | --------------------- | ----------------------------------------------------------------------------------------- |
 | build_class_modules   | Generates a class map file for usage with other scripts.                                  |
-| build_theme           | Builds the theme to be usable by Steam.                                                   |
 | make_readable_classes | Adds readable versions of classes to the focused window/page. ![Preview][classes-preview] |
 | replace_old_classes   | Replaces old classes with new ones for themes not using the [template][template].         |
 
@@ -59,12 +31,21 @@ $ npx steam-theming-utils build_theme shoppingcart
 | profileedit        | https://steamcommunity.com/my/edit                                           |
 | shoppingcart       | https://store.steampowered.com/cart                                          |
 
+## Errors
+
+| Name                      | Description                                                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| #ClassName is undefined   | Typo or that class either got renamed or removed, and so you will have to update it yourself.     |
+| [mod_name] no such module | Typo or that module either got renamed or removed, see diffs [here][diffs] depending on the page. |
+| [map_name] no such map    | Use `npx steam-theming-utils build_class_modules map_name` to create it.                          |
+
 ## Config
 
 Configured through a `steam-theming-utils.config.js` (or the one from [here][config-files]) file that must `export default` an [object][config-docs]. It's optional and has defaults listed [here][config-defaults].
 
 [classes-preview]: ./img/readable_classes.png
-[config-defaults]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/constants.js#L9-L23
-[config-docs]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/api.d.ts#L5-L55
+[config-defaults]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/constants.js#L7-L11
+[config-docs]: https://github.com/ricewind012/steam-theming-utils/blob/master/src/api.d.ts#L4-L16
 [config-files]: https://github.com/cosmiconfig/cosmiconfig#usage-for-end-users
+[diffs]: https://github.com/ricewind012/steam-theming-utils/tree/master/cdp/db
 [template]: https://github.com/ricewind012/more-advanced-theme-template
