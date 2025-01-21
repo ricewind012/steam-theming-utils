@@ -61,7 +61,6 @@ export const selectorReplacerPlugin = () => (css) => {
 		console.error("[%s] no such module", name);
 		return;
 	}
-	console.log("PAGE: %o => %o", name, page);
 
 	css.walkRules((rule) => {
 		rule.selector = rule.selector.replace(SELECTOR, (_, s) => {

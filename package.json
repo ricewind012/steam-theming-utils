@@ -18,6 +18,7 @@
   "dependencies": {
     "chrome-remote-interface": "^0.33.2",
     "lilconfig": "^3.1.2",
+    "postcss": "^8.5.1",
     "prettier": "^3.4.1"
   }
 }
