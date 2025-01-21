@@ -17,8 +17,11 @@ export const connection =
 		process.exit(1);
 	}));
 
-export const getConfig = async () =>
-	(await lilconfig("steam-theming-utils").search())?.config || DEFAULT_CONFIG;
+export const config = Object.assign(
+	DEFAULT_CONFIG,
+	(await lilconfig("steam-theming-utils").search())?.config || {},
+);
+
 export const readScript = (name) =>
 	import(`file://${path.join(SCRIPT_PATH, `${name}.js`)}`);
 

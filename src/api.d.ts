@@ -39,7 +39,7 @@ export type Page =
 	| "profileedit"
 	| "shoppingcart";
 
-export function getConfig(): Promise<Config>;
+export declare const config: Config;
 
 /**
  * @param file The script to read.
