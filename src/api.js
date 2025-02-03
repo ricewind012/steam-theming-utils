@@ -4,8 +4,12 @@ import { CDP_FILES_PATH, DEFAULT_CONFIG, SCRIPT_PATH } from "./constants.js";
 import { createConnection, readFile } from "./shared.js";
 
 // postcss-cli hangs because of cdp
+const isPostcss =
+	path.basename(process.argv[1]) === "postcss" ||
+	path.basename(path.dirname(process.argv[1])) === "postcss-cli";
+
 export const connection =
-	path.basename(process.argv[1]) !== "postcss" &&
+	!isPostcss &&
 	(await createConnection((e) =>
 		e.find((e) => e.title === "SharedJSContext"),
 	).catch((e) => {
