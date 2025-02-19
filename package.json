@@ -13,7 +13,7 @@
   "types": "./src/api.d.ts",
   "exports": {
     ".": "./src/api.js",
-    "./postcss-plugin": "./src/postcss_plugin.js"
+    "./postcss-plugins": "./src/postcss_plugins/index.js"
   },
   "dependencies": {
     "chrome-remote-interface": "^0.33.2",
