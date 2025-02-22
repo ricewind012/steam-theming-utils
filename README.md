@@ -13,11 +13,12 @@ Note that running any script requires Steam running with `-cef-enable-debugging`
 
 ## Scripts
 
-| Name                  | Description                                                                               |
-| --------------------- | ----------------------------------------------------------------------------------------- |
-| build_class_modules   | Generates a class map file for usage with other scripts.                                  |
-| make_readable_classes | Adds readable versions of classes to the focused window/page. ![Preview][classes-preview] |
-| replace_old_classes   | Replaces old classes with new ones for themes not using the [template][template].         |
+| Name                  | Description                                                                                            |
+| --------------------- | ------------------------------------------------------------------------------------------------------ |
+| build_class_modules   | Generates a class map file for usage with other scripts.                                               |
+| make_readable_classes | Adds readable versions of classes to the focused window/page. ![Preview][classes-preview]              |
+| migrate               | _Try to_ migrate to using readable class names. Other rules that can't be sorted go in `_UNSORTED.css` |
+| replace_old_classes   | Replaces old classes with new ones for themes not using the [template][template].                      |
 
 ## Pages
 

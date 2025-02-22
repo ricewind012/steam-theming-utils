@@ -26,6 +26,7 @@ interface Script {
 type ScriptFile =
 	| "build_class_modules"
 	| "make_readable_classes"
+	| "migrate"
 	| "replace_old_classes";
 
 /**
