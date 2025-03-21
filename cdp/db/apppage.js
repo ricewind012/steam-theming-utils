@@ -1,7 +1,7 @@
 exportedModules = [
 	["storeitemscarousel", (e) => e.StoreItemsCarousel],
 	["capsule", (e) => e.MainCapsuleImageContainer],
-	["capsulecontainer", (e) => e.ItemCount1],
+	["capsulecontainer", (e) => e.SeeAllLink],
 	["carousel", (e) => e.pipScrollerContainer],
 	["creatorhome", (e) => e.FollowBtnText],
 	["creatorhomecarousel", (e) => e.CreatorHomeWithItems],

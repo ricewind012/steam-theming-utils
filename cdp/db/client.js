@@ -66,16 +66,10 @@ specialModules = {
 					return "broadcastwidgets";
 				case exists("ClipUploadStatus"):
 					return "clipupload";
-				case exists("NotesPagedSettings"):
-					return "gamenotes";
 				case exists("GameNotesPopup"):
 					return "gamenotespopups";
 				case exists("ClipSavedHint"):
 					return "gamerecordingclip";
-				case exists("LinkHelp"):
-					return "pmhover";
-				case exists("CommandButton"):
-					return "prosemirror";
 			}
 		})();
 
@@ -236,7 +230,6 @@ exportedModules = [
 	],
 	["controllerconfiguratorchoosebinding", (e) => e.CombinedKeyboardContainer],
 	["controllerconfiguratorchooseconfiguration", (e) => e.ConfigurationButton],
-	["controllerconfiguratorgyrobuttonpicker", (e) => e.GyroButtonPickerDialog],
 	["controllerconfiguratoriconpicker", (e) => e.BindingIconImage],
 	["controllerconfiguratorsummary", (e) => e.StandardControl],
 	["controllerconfiguratorvirtualmenus", (e) => e.VirtualMenus],
@@ -313,6 +306,10 @@ exportedModules = [
 	["gamelisthome", (e) => e.CollectionIconBox],
 	["gamelistsearchbar", (e) => e.SearchFilterInputClear],
 	["gamelistsectionheader", (e) => e.SectionHeaderContent],
+	["gamenotesbbcode", (e) => e.PreservedUnsupportedTag],
+	["gamenotesdialog", (e) => e.NotesPagedSettings],
+	["gamenotesprosemirror", (e) => e.CommandButton],
+	["gamenotesprosemirrorhover", (e) => e.LinkHelp],
 	["gamepadcolorpicker", (e) => e.ColorPickerPreview],
 	["gamepadcontextmenu", (e) => e.BasicContextMenuHeader && !e.PageList],
 	["gamepaddropdown", (e) => e.DropDownControlButton],
@@ -440,7 +437,6 @@ exportedModules = [
 	["partnereventreferencedapps", (e) => e.ReferencedApps],
 	["partnereventshared", (e) => e.PartnerEventFont],
 	["partnersaledisplay", (e) => e.SalePageLogoSet],
-	["perf", (e) => e.PerfProfileInfo && !e.HDRBadge],
 	["personanameandstatus", (e) => e.statusAndName],
 	["personastatusicons", (e) => e.PersonaStatusIcon],
 	["pininput", (e) => e.DigitInputField],
@@ -546,8 +542,7 @@ exportedModules = [
 	["unstyledbutton", (e) => e.UnstyledButton],
 	["updatealert", (e) => e.BytesDownloaded],
 	["updaterfield", (e) => e.UpdateBytesRemaining],
-	["virtualkeyboard", (e) => e.Touched],
-	["virtualkeyboardcontainer", (e) => e.VirtualKeyboardContainer],
+	["virtualkeyboard", (e) => e.VirtualKeyboardContainer && e.Modal],
 	// May conflict with other broadcast modules in the future
 	["vodplayer", (e) => e.BroadcastCtn],
 	["voicechatheadersteamdeck", (e) => e.ActiveCall],
