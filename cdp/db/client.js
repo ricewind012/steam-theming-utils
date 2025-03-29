@@ -481,6 +481,7 @@ exportedModules = [
 		(e) => e.OverlayContainer && e.SpacingContainer,
 	],
 	["screenshotmanagerdialog", (e) => e.ScreenshotFormRow],
+	["screenshotmanagerphaselist", (e) => e.PhaseListContainer],
 	["screenshotpopout", (e) => e.PopupScreenshotModal],
 	["screenshots", (e) => e.ClickableScreenshot],
 	["scrollfade", (e) => e.ScrollFade],
