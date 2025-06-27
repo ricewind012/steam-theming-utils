@@ -1,4 +1,6 @@
 exportedModules = [
+	["cartfollowcreator", (e) => e.CartCreatorCtn],
+	["creatorhome", (e) => e.DevSummaryCtn],
 	["shoppingcart", (e) => e.ShoppingCartModal],
 	["shoppingcartcount", (e) => e.ShoppingCartCountCtn],
 	["shoppingcartitem", (e) => e.DropDownThin],

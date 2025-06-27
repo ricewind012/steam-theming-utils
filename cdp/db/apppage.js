@@ -1,4 +1,5 @@
 exportedModules = [
+	// TODO: not found if no broadcast
 	["broadcastembed", (e) => e.bordered_container],
 	["broadcastlivestreamicon", (e) => e.bordered_live_stream_icon],
 	["capsule", (e) => e.MainCapsuleImageContainer],
