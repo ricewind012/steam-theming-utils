@@ -40,7 +40,7 @@ function getClassMap(page) {
 
 export const selectorReplacerPlugin = () => (css) => {
 	const { file } = css.source.input;
-	const name = path.basename(file, ".scss");
+	const fileName = path.basename(file);
 
 	const splitPath = file.split(path.sep);
 	const page = PAGES.find((e) => splitPath.includes(e));
@@ -54,12 +54,13 @@ export const selectorReplacerPlugin = () => (css) => {
 		return;
 	}
 
-	const mod = map?.[name];
+	const modName = path.basename(fileName, ".scss");
+	const mod = map?.[modName];
 	const ignoredPaths = config.ignore || [];
 	const src = path.join(cwd, argv.base);
 	const skipFile = ignoredPaths.some((e) => file.startsWith(path.join(src, e)));
 	if (!mod && !skipFile) {
-		console.error("[%s] no such module", name);
+		console.error("[%s] no such module", fileName);
 		return;
 	}
 
@@ -67,7 +68,14 @@ export const selectorReplacerPlugin = () => (css) => {
 		rule.selector = rule.selector.replace(SELECTOR, (_, s) => {
 			const id = mod[s];
 			if (!id) {
-				console.error("[%s] %o is undefined", name, `#${s}`);
+				const { column, line } = rule.source.start;
+				console.error(
+					"[%s:%d:%d] %o is undefined",
+					fileName,
+					line,
+					column,
+					`#${s}`,
+				);
 				return;
 			}
 
