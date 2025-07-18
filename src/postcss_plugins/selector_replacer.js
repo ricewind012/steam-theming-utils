@@ -54,7 +54,7 @@ export const selectorReplacerPlugin = () => (css) => {
 		return;
 	}
 
-	const modName = path.basename(fileName, ".scss");
+	const modName = path.parse(fileName).name;
 	const mod = map?.[modName];
 	const ignoredPaths = config.ignore || [];
 	const src = path.join(cwd, argv.base);
@@ -68,14 +68,7 @@ export const selectorReplacerPlugin = () => (css) => {
 		rule.selector = rule.selector.replace(SELECTOR, (_, s) => {
 			const id = mod[s];
 			if (!id) {
-				const { column, line } = rule.source.start;
-				console.error(
-					"[%s:%d:%d] %o is undefined",
-					fileName,
-					line,
-					column,
-					`#${s}`,
-				);
+				console.error("[%s] %o is undefined", fileName, `#${s}`);
 				return;
 			}
 
