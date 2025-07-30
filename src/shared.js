@@ -56,6 +56,8 @@ export async function getPageUrl(page) {
 			return pageObj(await resolve("SteamIDEditPage"));
 		case "shoppingcart":
 			return pageObj(await resolve("StoreCart"));
+		case "storemenu":
+			return pageObj(await resolve("StoreFrontPage"));
 	}
 }
 

@@ -31,6 +31,7 @@ Note that running any script requires Steam running with `-cef-enable-debugging`
 | notificationspage  | https://steamcommunity.com/my/notifications                                  |
 | profileedit        | https://steamcommunity.com/my/edit                                           |
 | shoppingcart       | https://store.steampowered.com/cart                                          |
+| storemenu          | https://store.steampowered.com (or any Steam store page)                     |
 
 ## Errors
 
