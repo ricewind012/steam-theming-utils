@@ -39,12 +39,19 @@ specialModules = {
  * These are not seen in webpackCache for some reason.
  * TODO: unify with the rest ?
  * TODO: is absence of top-level await a bug ?
+ *
+ * 674:
+ * - bbcodeeditor
+ * - bbcodesuggestions
+ * - clanimagechooser
+ * - clanimagepickandresize
+ * - sharewithfriends
  */
 (async () => {
 	window.parsedModules = [
 		...(
 			await Promise.all(
-				["awardicon", "broadcast", "gamenotes", "gamerecording"].map(
+				["674", "awardicon", "broadcast", "gamenotes", "gamerecording"].map(
 					async (e) =>
 						(await fetch(`https://steamloopback.host/${e}.js`)).text(),
 				),
@@ -60,16 +67,28 @@ specialModules = {
 			switch (true) {
 				case exists("IconList"):
 					return "awardicon";
+				case exists("DragTarget"):
+					return "bbcodeeditor";
+				case exists("BBCode"):
+					return "bbcodesuggestions";
 				case exists("PopOutVideoTitleBar"):
 					return "broadcastembeddable";
+				case exists("BroadcastPlayerLite"):
+					return "broadcastplayer";
 				case exists("StoreSaleImage_mini"):
 					return "broadcastwidgets";
+				case exists("ImagesOuterContainer"):
+					return "clanimagechooser";
+				case exists("Image") && Object.keys(e).length === 1:
+					return "clanimagepickandresize";
 				case exists("ClipUploadStatus"):
 					return "clipupload";
 				case exists("GameNotesPopup"):
 					return "gamenotespopups";
 				case exists("ClipSavedHint"):
 					return "gamerecordingclip";
+				case exists("ShareDescription"):
+					return "sharewithfriends";
 			}
 		})();
 
@@ -95,7 +114,6 @@ exportedModules = [
 	["appactionbutton", (e) => e.PlayButtonContainer],
 	["appactivityday", (e) => e.AppActivityDay],
 	["appactivitydlc", (e) => e.CarouselControlsPadding],
-	["appcarouseltrailer", (e) => e.AppCarouselTrailerCtn],
 	["appdetails", (e) => e.AppDetailsOverviewPanel],
 	["appdetailsachievementssection", (e) => e.AchievementHoverContainer],
 	["appdetailsactivitysection", (e) => e.ActivityFeedContainer],
@@ -160,9 +178,7 @@ exportedModules = [
 	["basiclibrarysettingszoo", (e) => e.GiantHeading],
 	["basicpartnereventspage", (e) => e.BasicPartnerEventsPage],
 	["bbcode", (e) => e.ChatMessageSteamStore],
-	["bbcodeeditor", (e) => e.DragTarget],
 	["bbcodes", (e) => e.QuoteAuthor],
-	["bbcodesuggestions", (e) => e.BBCode],
 	["bluetoothsettings", (e) => e.NotConnectedLabel && e.Header],
 	["borrowgamedialog", (e) => e.BorrowGameDialog],
 	["bottombar", (e) => e.BottomBarContainer],
@@ -172,7 +188,6 @@ exportedModules = [
 	["broadcastchat", (e) => e.BroadcastChat],
 	["broadcastchatannouncement", (e) => e.GiveawayWinnerBox],
 	["broadcastfirsttime", (e) => e.BroadcastFirstTimeDialog],
-	["broadcastplayer", (e) => e.BroadcastPlayerLite],
 	["broadcastsettings", (e) => e.ConfigureMic],
 	["broadcaststatus", (e) => e.BroadcastStatusBody],
 	["browserviewfindinpage", (e) => e.ControlButton],
@@ -190,8 +205,6 @@ exportedModules = [
 	["chattabs", (e) => e.ChatTabTransitionGroup],
 	["checkforupdatesdialog", (e) => e.CheckForUpdatesDialog],
 	["claimitemshared", (e) => e.DialogCtn],
-	["clanimagechooser", (e) => e.ImagesOuterContainer],
-	["clanimagepickandresize", (e) => e.Image && Object.keys(e).length === 1],
 	["clipdecorator", (e) => e.ClipDecorator],
 	["cliphighlightcontextmenu", (e) => e.HighlightContextMenuItem],
 	["clipmanager", (e) => e.ClipActions],
@@ -256,8 +269,6 @@ exportedModules = [
 	["desktopsecuritysettings", (e) => e.SteamGuardIcon],
 	["desktoptoasts", (e) => e.DesktopToastPopup],
 	["dialogs", (e) => e.DialogTitle && e.DialogContent],
-	["discoveryqueuewidget", (e) => e.DiscoveryQueueApp],
-	["discoveryqueuewizard", (e) => e.DeckVerifiedLogo],
 	["discussionwidget", (e) => e.DiscussContainer],
 	["displayscaledialog", (e) => e.YouCanChangeThisLater],
 	["displaysettings", (e) => e.TimeRangeControls && !e.BandwidthInput],
@@ -327,7 +338,7 @@ exportedModules = [
 	["gamepadpage", (e) => e.GamepadPage && !e.LeftStick],
 	["gamepadpagedsettings", (e) => e.PagedSettingsDialog_PageList_ShowTitle],
 	["gamepadsearch", (e) => e.GamepadSearch],
-	["gamepadslider", (e) => e.DefaultValueIsColorRange],
+	["gamepadslider", (e) => e.DefaultValueIsColorRange && !e.LearnMore],
 	["gamepadtabbedpage", (e) => e.CanBeHeaderBackground],
 	["gamepadtoasts", (e) => e.GamepadToastPlaceholder],
 	["gamepadui", (e) => e.GamepadUIPopupWindowBody],
@@ -387,7 +398,7 @@ exportedModules = [
 	["logsettings", (e) => e.ManualOverlayContainer],
 	["main", (e) => e.throbberContainer],
 	["mainbrowser", (e) => e.MainBrowserContainer],
-	["mainmenu", (e) => e.IsVirtualKeyboardShown],
+	["mainmenu", (e) => e.IsVirtualKeyboardShown && e.ViewPlaceholder],
 	["mainmenuapprunning", (e) => e.NavigationBox],
 	["mainpanelapprunning", (e) => e.MainPanelAppRunning],
 	["managefriends", (e) => e.GenerateLinkButton],
@@ -504,7 +515,6 @@ exportedModules = [
 	["sharedappdetailsheader", (e) => e.BoxSizerDelete],
 	["sharedialog", (e) => e.ShareButton && e.ShareIcon],
 	["sharescreenshotupload", (e) => e.ShareScreenshotDialog],
-	["sharewithfriends", (e) => e.ShareDescription],
 	["shorttemplates", (e) => e.ShortTemplate],
 	["shutdowndialog", (e) => e.ShutdownDialog],
 	["soundtrackoverlay", (e) => e.ContainerScroll && e.Back && !e.Art],
