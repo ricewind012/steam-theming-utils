@@ -14,7 +14,7 @@ export const connection =
 		e.find((e) => e.title === "SharedJSContext"),
 	).catch((e) => {
 		console.log(
-			"%s\nTry running Steam with %o",
+			"%s\nTry running Steam with %o or using Millennium",
 			e.message,
 			"-cef-enable-debugging",
 		);
