@@ -8,7 +8,7 @@
   },
   "type": "module",
   "bin": {
-    "steam-theming-utils": "./src/index.js"
+    "steam-theming-utils": "src/index.js"
   },
   "types": "./src/api.d.ts",
   "exports": {
