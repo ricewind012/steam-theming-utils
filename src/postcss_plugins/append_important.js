@@ -22,6 +22,11 @@ export const appendImportantPlugin =
 				(node) => !opts.filter.some((e) => e.test(node.parent.selector)),
 			);
 			for (const node of nodes) {
+				// !important is invalid in @keyframes
+				if (node.parent.parent.name === "keyframes") {
+					continue;
+				}
+
 				node.important = true;
 			}
 		});
