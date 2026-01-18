@@ -12,6 +12,7 @@ const PAGES = [
 	"notificationspage",
 	"profileedit",
 	"shoppingcart",
+	"storemenu",
 ];
 const SELECTOR = /#(\w+)/g;
 
