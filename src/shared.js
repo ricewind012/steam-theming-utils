@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import cdp from "chrome-remote-interface";
-import * as findProcess from "find-process";
+import find from "find-process";
 import { runWithResult } from "./api.js";
 import { STORE_BASE_URL } from "./constants.js";
 
@@ -68,8 +68,7 @@ export async function getPageUrl(page) {
  * @param {(targets: cdp.Target[]) => cdp.Target} target
  */
 export async function createConnection(target) {
-	// https://github.com/yibn2008/find-process/issues/83
-	const processes = await findProcess.default.default("name", "steamwebhelper");
+	const processes = await find("name", "steamwebhelper");
 	const port = Number(
 		processes
 			.find((e) => e.cmd.includes("--remote-debugging-port="))
