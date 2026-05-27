@@ -68,8 +68,7 @@ export async function getPageUrl(page) {
  * @param {(targets: cdp.Target[]) => cdp.Target} target
  */
 export async function createConnection(target) {
-	// https://github.com/yibn2008/find-process/issues/83
-	const processes = await findProcess.default.default("name", "steamwebhelper");
+	const processes = await findProcess.default("name", "steamwebhelper");
 	const port = Number(
 		processes
 			.find((e) => e.cmd.includes("--remote-debugging-port="))
